@@ -9,8 +9,10 @@ repositories {
 }
 
 dependencies {
-    // Веб-сервер (чтобы были HTTP запросы)
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    // Безопасность (то, что мы изучаем)
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Добавляем это для тестов:
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
 }
