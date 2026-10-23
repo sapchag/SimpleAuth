@@ -3,7 +3,9 @@ package com.example.demo;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
@@ -11,6 +13,7 @@ import static org.hamcrest.Matchers.containsString;
 
 // 1. Поднимаем ВЕСЬ контекст Spring и запускаем РЕАЛЬНЫЙ сервер на случайном порту
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ExtendWith(SpringExtension.class)
 public class SecurityIntegrationTest {
 
     // 2. Spring автоматически подставит сюда порт, на котором запустился тестовый сервер
