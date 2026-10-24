@@ -16,3 +16,7 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testImplementation 'io.rest-assured:json-path:5.4.0'
 }
+// Указываем, что тесты должны запускаться через JUnit Platform
+tasks.named('test') {
+    useJUnitPlatform()
+}
