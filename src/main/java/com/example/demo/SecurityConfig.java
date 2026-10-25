@@ -12,20 +12,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // 1. Правило: требовать пароль для всего
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults()); // Включает окно ввода пароля
+                .httpBasic(cfg -> cfg.authenticationEntryPoint(customBasicAuthenticationEntryPoint()));
         return http.build();
     }
 
-    // 2. База пользователей (прямо в коде, без базы данных)
+    @Bean
+    public CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint() {
+        var ep = new CustomBasicAuthenticationEntryPoint();
+        ep.setRealmName("Demo Realm");
+        return ep;
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
         var user = User.withUsername("admin")
-                .password("{noop}123") // {noop} значит пароль не зашифрован
+                .password("{noop}123")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
